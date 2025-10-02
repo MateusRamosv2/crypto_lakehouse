@@ -26,8 +26,16 @@ df_silver = df_silver.rename(columns={"date": "data", "sno": "ano", "name": "nom
 df_silver['data'] = df_silver['data'].dt.strftime('%Y-%m-%d')
 df_silver = df_silver.drop_duplicates()
 
+numeric_columns = ["preco_alto", "preco_baixo", "preco_abertura", "preco_fechamento", "capitalizacao"]
+for col in numeric_columns:
+    df_silver = df_silver[df_silver[col] >= 0]
+    
+df_silver = df_silver.sort_values(by="data", ascending=True)
 
-# display(df_silver)
+df_silver["simbolo"] = df_silver["simbolo"].str.upper()
+df_silver["nome"] = df_silver["nome"].str.title()
 
-# caminho_parquet = "../silver/coin_bitcoin_silver.parquet"
-# df_silver.to_parquet(caminho_parquet, index=False)
+display(df_silver)
+
+caminho_parquet = "../silver/coin_bitcoin_silver.parquet"
+df_silver.to_parquet(caminho_parquet, index=False)
