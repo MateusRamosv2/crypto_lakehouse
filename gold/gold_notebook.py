@@ -56,3 +56,8 @@ FROM gold_bitcoin
 ORDER BY volatilidade DESC
 LIMIT 10
 """))
+
+
+
+caminho_gold = "../gold/coin_bitcoin_gold.parquet"
+df_gold.to_parquet(caminho_gold, index=False)
