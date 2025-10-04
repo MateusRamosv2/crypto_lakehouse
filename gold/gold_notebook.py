@@ -2,7 +2,6 @@
 import pandas as pd
 from pyspark.sql import SparkSession
 
-# Inicializa Spark (necessário para usar SQL no Databricks)
 spark = SparkSession.builder.getOrCreate()
 
 caminho_silver = "../silver/coin_bitcoin_silver.parquet"
@@ -33,7 +32,6 @@ FROM gold_bitcoin
 GROUP BY simbolo
 """))
 
-# Exemplo 2: Variação mensal média
 display(spark.sql("""
 SELECT 
     DATE_FORMAT(date_trunc('month', CAST(data AS DATE)), "yyyy-MM") as mes,
@@ -45,7 +43,6 @@ GROUP BY date_trunc('month', CAST(data AS DATE))
 ORDER BY mes
 """))
 
-# Exemplo 3: Top 10 dias de maior volatilidade
 display(spark.sql("""
 SELECT 
     data,
