@@ -14,4 +14,8 @@ df_gold["volatilidade"] = df_gold["preco_alto"] - df_gold["preco_baixo"]
 
 df_gold["media_movel_7d"] = df_gold["preco_fechamento"].rolling(window=7).mean()
 
+spark_df_gold = spark.createDataFrame(df_gold)
+
+spark_df_gold.createOrReplaceTempView("gold_bitcoin")
+
 display(df_gold)
