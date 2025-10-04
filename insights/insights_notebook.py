@@ -75,3 +75,6 @@ plt.ylabel("Preço (USD)")
 plt.legend()
 plt.grid(True)
 plt.show()
+
+caminho_insights = "../insights/coin_bitcoin_insights.parquet"
+df_insights.to_parquet(caminho_insights, index=False)
